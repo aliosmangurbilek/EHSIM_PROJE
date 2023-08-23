@@ -62,6 +62,7 @@ namespace webapi.Controllers
             _unitOfWork.Repository<Customer>().InsertOrUpdate(data);
             _unitOfWork.SaveChanges();
             return new ApiResult { Result = true };
+            
         }
 
         [HttpPost("GetCustomerGrid")]

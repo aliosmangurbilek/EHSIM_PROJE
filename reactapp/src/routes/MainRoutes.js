@@ -3,6 +3,7 @@ import { lazy } from 'react';
 // project imports
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
+import UrunEkle from 'views/digerIslemler/UrunEkle';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
@@ -108,6 +109,15 @@ const MainRoutes = {
                 {
                     path: 'musteri-duzenle/:id',
                     element: <MusteriEkle />
+                }
+            ]
+        },
+        {
+            path: 'digerIslemler',
+            children: [
+                {
+                    path: 'urun-ekle',
+                    element: <UrunEkle />
                 }
             ]
         }

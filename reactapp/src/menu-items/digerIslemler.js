@@ -1,8 +1,8 @@
 // assets
-import { IconUsers } from '@tabler/icons';
+import { IconUsers, IconShoppingBag } from '@tabler/icons';
 
 // constant
-const icons = { IconUsers };
+const icons = { IconUsers, IconShoppingBag };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -16,7 +16,6 @@ const digerIslemler = {
             title: 'Müşteriler',
             type: 'collapse',
             icon: icons.IconUsers,
-
             children: [
                 {
                     id: 'musteriler',
@@ -29,6 +28,26 @@ const digerIslemler = {
                     title: 'Müşteri Ekle',
                     type: 'item',
                     url: '/digerIslemler/musteri-ekle'
+                }
+            ]
+        },
+        {
+            id: 'urunler', // Yeni eklenen kısım: "Ürünler" bağlantısı
+            title: 'Ürünler',
+            type: 'collapse',
+            icon: icons.IconShoppingBag, // Uygun bir ürün ikonu seçin veya yükleyin
+            children: [
+                {
+                    id: 'urun-listesi',
+                    title: 'Ürün Listesi',
+                    type: 'item',
+                    url: '/digerIslemler/urun-listesi'
+                },
+                {
+                    id: 'urun-ekle',
+                    title: 'Ürün Ekle',
+                    type: 'item',
+                    url: '/digerIslemler/urun-ekle'
                 }
             ]
         }
