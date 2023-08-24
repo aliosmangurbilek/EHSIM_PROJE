@@ -88,8 +88,8 @@ function UrunEkle() {
     };
 
     const urunGetirPromise = () => {
-        // Urun getirme işlemini buraya ekleyin.
-        // Urun bilgilerini set etmek için setState kullanabilirsiniz.
+        // Urun getirme işlemini buraya eklenecek
+        // Urun bilgilerini set etmek için setState
     };
 
     return (
