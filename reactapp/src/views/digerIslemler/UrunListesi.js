@@ -15,7 +15,7 @@ const UrunlerListesi = () => {
     const { data, isError, isFetching, isLoading, refetch } = useQuery({
         queryKey: ['urunler-data'],
         queryFn: async () => {
-            // Ürün çekmek için API isteği buraya 
+            // Ürünleri çekmek için API isteği
         },
         keepPreviousData: true
     });
@@ -91,7 +91,7 @@ const UrunlerListesi = () => {
                           }
                         : undefined
                 }
-                // Diğer prop değerleri buraya
+                // Diğer prop değerleri buraya eklenebilir
             />
         </>
     );
