@@ -1,6 +1,6 @@
 import React from 'react';
 import MaterialReactTable from 'material-react-table';
-import { Box, IconButton, Tooltip } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
@@ -12,12 +12,16 @@ const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 const UrunlerListesi = () => {
     const navigate = useNavigate();
 
-    const { data, isError, isFetching, isLoading, refetch } = useQuery({
+    const { data, isError, refetch } = useQuery({
         queryKey: ['urunler-data'],
         queryFn: async () => {
-            // Ürünleri çekmek için API isteği
-        },
-        keepPreviousData: true
+            try {
+                const response = await axios.get('http://localhost:5273/api/Urun'); // API endpointi buraya göre düzenleyin
+                return response.data; // API'den gelen veriyi döndürün
+            } catch (error) {
+                throw error; // Hata durumunda hatayı yakalayıp fırlatın
+            }
+        }
     });
 
     const columns = [
@@ -30,12 +34,20 @@ const UrunlerListesi = () => {
             header: 'Ürün Açıklaması'
         },
         {
+            accessorKey: 'urunEbadi',
+            header: 'Ürün Ebadı'
+        },
+        {
             accessorKey: 'urunFiyati',
             header: 'Ürün Fiyatı'
         },
         {
             accessorKey: 'urunTedarikciFirma',
             header: 'Tedarikçi Firma'
+        },
+        {
+            accessorKey: 'urunKdvOrani',
+            header: 'Ürün KDV Oranı'
         }
     ];
 
@@ -48,7 +60,21 @@ const UrunlerListesi = () => {
     };
 
     const deletePromise = (id) => {
-        // Ürünü silme işlemleri buraya
+        return new Promise(async (resolve, reject) => {
+            // Ürünü silme işlemleri buraya
+            try {
+                // Silme isteğini gerçekleştirin
+                const response = await axios.delete(`http://localhost:5273/api/Urun/${id}`);
+                if (response.data.result) {
+                    refetch(); // Tabloyu güncelle
+                    resolve(response.data);
+                } else {
+                    reject(new Error('İşlem başarısız'));
+                }
+            } catch (error) {
+                reject(error);
+            }
+        });
     };
 
     return (

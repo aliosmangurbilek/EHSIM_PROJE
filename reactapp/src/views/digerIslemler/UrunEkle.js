@@ -26,7 +26,7 @@ function UrunEkle() {
         } else {
             setUrunAdi('');
             setUrunAciklamasi('');
-            setUrunEbadı('');
+            setUrunEbadi('');
             setUrunFiyati('');
             setUrunTedarikciFirma('');
             setUrunKdvOrani('');
@@ -37,8 +37,8 @@ function UrunEkle() {
     const urunEkle = () => {
         toast.promise(urunEklePromise, {
             pending: 'Ürün kaydı yapılıyor',
-            success: urunAdi + ' başarıyla eklendi 👌',
-            error: urunAdi + ' eklenirken hata oluştu 🤯'
+            success: UrunAdi + ' başarıyla eklendi 👌',
+            error: UrunAdi + ' eklenirken hata oluştu 🤯'
         });
     };
 
@@ -46,17 +46,17 @@ function UrunEkle() {
         return new Promise(async (resolve, reject) => {
             const start = Date.now();
             setValidationErrors({});
-            let data = JSON.stringify({
+            const data = {
                 id: typeof id !== 'undefined' ? id : 0,
-                urunAdi: urunAdi,
-                urunAciklamasi: urunAciklamasi,
-                urunEbadı: urunEbadı,
-                urunFiyati: urunFiyati,
-                urunTedarikciFirma: urunTedarikciFirma,
-                urunKdvOrani: urunKdvOrani
-            });
+                UrunAdi: UrunAdi,
+                UrunAciklamasi: UrunAciklamasi,
+                UrunEbadi: UrunEbadi,
+                UrunFiyati: UrunFiyati,
+                UrunTedarikciFirma: UrunTedarikciFirma,
+                UrunKdvOrani: UrunKdvOrani
+            };
 
-            let config = {
+            const config = {
                 method: 'post',
                 maxBodyLength: Infinity,
                 url: 'http://localhost:5273/api/Urun/CreateOrUpdate',
@@ -64,7 +64,7 @@ function UrunEkle() {
                     'Content-Type': 'application/json',
                     Accept: 'text/plain'
                 },
-                data: data
+                data: JSON.stringify(data)
             };
 
             axios
@@ -88,8 +88,21 @@ function UrunEkle() {
     };
 
     const urunGetirPromise = () => {
-        // Urun getirme işlemini buraya eklenecek
-        // Urun bilgilerini set etmek için setState
+        axios
+            .get(`http://localhost:5273/api/Urun/Get/${id}`)
+            .then((response) => {
+                const Urun = response.data;
+                setUrunAdi(UrunAdi.UrunAdi);
+                setUrunAciklamasi(UrunAciklamasi.UrunAciklamasi);
+                setUrunEbadı(UrunEbadi.UrunEbadi);
+                setUrunFiyati(UrunFiyati.UrunFiyati);
+                setUrunTedarikciFirma(UrunTedarikciFirma.UrunTedarikciFirma);
+                setUrunKdvOrani(UrunKdvOrani.UrunKdvOrani);
+                setIsFetching(false);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     };
 
     return (
