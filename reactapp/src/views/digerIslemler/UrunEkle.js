@@ -26,7 +26,7 @@ function UrunEkle() {
         } else {
             setUrunAdi('');
             setUrunAciklamasi('');
-            setUrunEbadi('');
+            setUrunEbadı('');
             setUrunFiyati('');
             setUrunTedarikciFirma('');
             setUrunKdvOrani('');
@@ -48,12 +48,12 @@ function UrunEkle() {
             setValidationErrors({});
             const data = {
                 id: typeof id !== 'undefined' ? id : 0,
-                UrunAdi: UrunAdi,
-                UrunAciklamasi: UrunAciklamasi,
-                UrunEbadi: UrunEbadi,
-                UrunFiyati: UrunFiyati,
-                UrunTedarikciFirma: UrunTedarikciFirma,
-                UrunKdvOrani: UrunKdvOrani
+                urunAdi: UrunAdi,
+                urunAciklamasi: UrunAciklamasi,
+                urunEbadi: UrunEbadi,
+                urunFiyati: UrunFiyati,
+                urunTedarikciFirma: UrunTedarikciFirma,
+                urunKdvOrani: UrunKdvOrani
             };
 
             const config = {
@@ -91,13 +91,13 @@ function UrunEkle() {
         axios
             .get(`http://localhost:5273/api/Urun/Get/${id}`)
             .then((response) => {
-                const Urun = response.data;
-                setUrunAdi(UrunAdi.UrunAdi);
-                setUrunAciklamasi(UrunAciklamasi.UrunAciklamasi);
-                setUrunEbadı(UrunEbadi.UrunEbadi);
-                setUrunFiyati(UrunFiyati.UrunFiyati);
-                setUrunTedarikciFirma(UrunTedarikciFirma.UrunTedarikciFirma);
-                setUrunKdvOrani(UrunKdvOrani.UrunKdvOrani);
+                const urun = response.data;
+                setUrunAdi(urun.urunAdi);
+                setUrunAciklamasi(urun.urunAciklamasi);
+                setUrunEbadı(urun.urunEbadi);
+                setUrunFiyati(urun.urunFiyati);
+                setUrunTedarikciFirma(urun.urunTedarikciFirma);
+                setUrunKdvOrani(urun.urunKdvOrani);
                 setIsFetching(false);
             })
             .catch((error) => {
